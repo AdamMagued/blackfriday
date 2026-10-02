@@ -652,11 +652,14 @@ func scanLinkRef(p *Markdown, data []byte, i int) (linkOffset, linkEnd, titleOff
 		i++
 	}
 	linkOffset = i
+	if i == len(data) {
+		return
+	}
 	for i < len(data) && data[i] != ' ' && data[i] != '\t' && data[i] != '\n' && data[i] != '\r' {
 		i++
 	}
 	linkEnd = i
-	if data[linkOffset] == '<' && data[linkEnd-1] == '>' {
+	if linkOffset < len(data) && linkOffset < linkEnd && data[linkOffset] == '<' && data[linkEnd-1] == '>' {
 		linkOffset++
 		linkEnd--
 	}

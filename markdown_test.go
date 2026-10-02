@@ -34,6 +34,11 @@ func TestDocument(t *testing.T) {
 		// https://github.com/russross/blackfriday/issues/173
 		"   [",
 		"<p>[</p>\n",
+
+		// This shouldn't panic.
+		// https://github.com/russross/blackfriday/issues/695
+		"[0000000]:<",
+		"<p>[0000000]:&lt;</p>\n",
 	}
 	doTests(t, tests)
 }
